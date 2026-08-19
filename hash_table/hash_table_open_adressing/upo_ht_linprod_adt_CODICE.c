@@ -52,9 +52,9 @@ void* upo_ht_linprod_put(upo_tablehash_t* ht, void* key, void* value) {
     while ((ht->slots[index_key].key != NULL && ht->key_compare(key, ht->slots[index_key].key) != 0)
             || (ht->slots[index_key].tombstone == 1)) {
         
-        // Se troviamo un tombstone, memorizziamo il suo indice
+        // Se troviamo un tombstone, memorizziamo il suo indice (solo per il primo tombstone)
         if (ht->slots[index_key].tombstone == 1 && !tombstone_trovato) {
-            tombstone_trovato = 1;
+            tombstone_trovato = 1; //Tombstone trovate
             index_tombstone = index_key;
         }
         // Calcola il prossimo indice usando la funzione di hash
